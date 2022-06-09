@@ -39,24 +39,24 @@ export default {
         }
     },
     methods: {
-        async Whitelist() {
+        async Whitelist() { //whitelist an address or the address of a metamask account
         try{
             this.state = false;
             this.success = false;
             const use_injected= this.use_injected;
             var address = this.address;
-            if(use_injected == 1) {
-                const provider = window.ethereum
-                await provider.enable()
-                const web3 = new Web3(provider)
-                address = await web3.eth.getAccounts()
+            if(use_injected == 1) { //Metamask
+                const provider = window.ethereum;
+                await provider.enable();
+                const web3 = new Web3(provider);
+                address = await web3.eth.getAccounts();
             }
             if(!address) {
                 this.state = true;
                 this.message = "Error, Address is needed";
                 }
 
-            const request = await fetch(`http://localhost:3001/token/create/${address}`, {
+            const request = await fetch(`https://back-count-liviator.herokuapp.com/token/create/${address}`, {
                 method:'POST',
                 headers:{
                     'Content-Type':'application/json'
@@ -69,7 +69,7 @@ export default {
             }
             else {
                 this.message = "Address whitelisted";
-                this.success = true
+                this.success = true;
             }
         } catch(e) {
             alert(e)

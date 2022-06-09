@@ -44,7 +44,7 @@ export default {
                 this.message = "Processing your request";
 
                 //check if token available on backend
-                const request = await fetch(`http://localhost:3001/token/get/${address}`, {
+                const request = await fetch(`https://back-count-liviator.herokuapp.com/token/get/${address}`, {
                 method:'GET',
                 headers:{
                     'Content-Type':'application/json'
@@ -137,14 +137,14 @@ export default {
     border-radius: 25px;
     padding-top: 20px;
     padding-bottom:20px;
-    top:150px;
+    top:200px;
     position: relative;
     align-items: center;
     justify-content: center;
 }
 .count_failure {
     background-color: rgba(242,0,0,0.37);
-    top:150px;
+    top:200px;
     border-radius: 25px;
     padding-top: 20px;
     padding-bottom:20px;
@@ -156,7 +156,7 @@ export default {
 .count_success {
     background-color: #18F518;
     border-radius: 25px;
-    top:150px;
+    top:200px;
     padding-top: 20px;
     padding-bottom:20px;
     position: relative;
