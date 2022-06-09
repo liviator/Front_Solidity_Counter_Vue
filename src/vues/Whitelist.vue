@@ -50,6 +50,7 @@ export default {
                 await provider.enable();
                 const web3 = new Web3(provider);
                 address = await web3.eth.getAccounts();
+                this.use_injected = 0;
             }
             if(!address) {
                 this.state = true;
