@@ -45,13 +45,13 @@ export default {
             this.success = false;
             const use_injected= this.use_injected;
             var address = this.address;
-            if(use_injected == 1) {
+            if(use_injected == 1) { //user wants to whitelist his wallet's address
                 const provider = window.ethereum;
                 await provider.enable();
                 const web3 = new Web3(provider);
                 address = await web3.eth.getAccounts();
             }
-            if(!address) {
+            if(!address) { //case where user tried to whitelist an empty address (not his or not a designated one)
                 this.state = true;
                 this.message = "Error, Address is needed";
                 }
