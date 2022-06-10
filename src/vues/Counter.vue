@@ -16,6 +16,7 @@
 <script>
 import Web3 from "web3";
 import abi from "../assets/abi.json";
+//setting global variables
 const address_contract = "0x13A6DAadFABE9295eC96da1c626FB672C50F7a04";
 const provider = window.ethereum;
 const web3 = new Web3(provider);
@@ -36,7 +37,7 @@ export default {
     },
     methods: {
 
-        async RetrieveToken(address) {
+        async RetrieveToken(address) { //method to verify is address is whitelisted by the backend, will reject any query made by a non-whitelisted address
             try {
                 this.fail = false;
                 this.success = false;
@@ -69,11 +70,11 @@ export default {
         async Increment() {
             try {
             await provider.enable();
-            const address = await web3.eth.getAccounts();
+            const address = await web3.eth.getAccounts(); //get user's wallet address
             const token = await this.RetrieveToken(address);
             if(token != -1) {
-                const result = await contract.methods.increment(token.token.r, token.token.s, token.token.v).send({from:address[0]}              ) 
-                    if(result.status == true){
+                const result = await contract.methods.increment(token.token.r, token.token.s, token.token.v).send({from:address[0]})  //call the smart contract to increase the counter
+                    if(result.status == true){ //check if transaction succeeded
                         this.success = true;
                         this.processing = false;
                         this.message = "Counter Incremented";
@@ -93,7 +94,7 @@ export default {
         },
         async Decrement() {
             try {
-                if(this.count >0) {
+                if(this.count >0) { //condition of the contract
                     await provider.enable();
                     const address = await web3.eth.getAccounts();
                     const token = await this.RetrieveToken(address);
